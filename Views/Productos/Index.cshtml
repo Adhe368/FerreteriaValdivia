@@ -1,0 +1,43 @@
+@model IEnumerable<FerreteriaValdiviaNueva.Models.Producto>
+
+@{
+    ViewData["Title"] = "Inventario de Productos";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Inventario de Productos - Ferretería Valdivia</h2>
+        <a asp-action="Create" class="btn btn-primary">➕ Nuevo Producto</a>
+    </div>
+    <hr />
+
+    <table class="table table-striped table-bordered shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Precio Venta</th>
+                <th>Stock</th>
+                <th>Categoría</th>
+                <th>Proveedor</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>@item.CodigoProducto</td>
+                    <td>@item.Nombre_Producto</td>
+                    <td>@item.PrecioVenta Bs</td>
+                    <td>@item.StockActual</td>
+                    <td>@(item.Categoria?.NombreCategoria ?? "Sin Categoría")</td>
+                    <td>@(item.Proveedor?.NombreProveedor ?? "Sin Proveedor")</td>
+                    <td class="text-center">
+                        <a asp-action="Edit" asp-route-id="@item.CodigoProducto" class="btn btn-sm btn-warning">✏️ Editar</a>
+                        <a asp-action="Delete" asp-route-id="@item.CodigoProducto" class="btn btn-sm btn-danger">🗑️ Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

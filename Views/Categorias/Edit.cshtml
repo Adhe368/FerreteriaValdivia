@@ -1,0 +1,34 @@
+@model FerreteriaValdiviaNueva.Models.Categoria
+
+@{
+    ViewData["Title"] = "Editar Categoría";
+}
+
+<div class="container mt-4">
+    <h2>Editar Categoría</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdCategoria" />
+
+                <div class="mb-3">
+                    <label asp-for="NombreCategoria" class="form-label">Nombre de la Categoría</label>
+                    <input asp-for="NombreCategoria" class="form-control" required />
+                    <span asp-validation-for="NombreCategoria" class="text-danger"></span>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">💾 Actualizar Cambios</button>
+                    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

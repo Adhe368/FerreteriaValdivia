@@ -1,0 +1,33 @@
+@model FerreteriaValdiviaNueva.Models.Cliente
+
+@{
+    ViewData["Title"] = "Eliminar Cliente";
+}
+
+<div class="container mt-4">
+    <h2>Eliminar Cliente</h2>
+    <h3 class="text-danger">¿Estás seguro de que deseas eliminar este cliente?</h3>
+    <hr />
+
+    <div>
+        <dl class="row">
+            <dt class="col-sm-3">ID:</dt>
+            <dd class="col-sm-9">@Model.IdCliente</dd>
+
+            <dt class="col-sm-3">Nombre:</dt>
+            <dd class="col-sm-9">@Model.Nombre @Model.Apellido</dd>
+
+            <dt class="col-sm-3">NIT / CI:</dt>
+            <dd class="col-sm-9">@(Model.NitCi ?? "S/N")</dd>
+
+            <dt class="col-sm-3">Teléfono:</dt>
+            <dd class="col-sm-9">@(Model.Telefono ?? "Sin Teléfono")</dd>
+        </dl>
+        
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="IdCliente" />
+            <button type="submit" class="btn btn-danger">Sí, Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>

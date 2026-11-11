@@ -1,0 +1,47 @@
+@model IEnumerable<FerreteriaValdiviaNueva.Models.Caja>
+
+@{
+    ViewData["Title"] = "Gestión de Cajas";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Gestión de Cajas</h2>
+        <a asp-action="Create" class="btn btn-primary">➕ Aperturar Caja</a>
+    </div>
+    <hr />
+
+    <table class="table table-striped table-bordered shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Fecha Apertura</th>
+                <th>Fecha Cierre</th>
+                <th>Monto Inicial</th>
+                <th>Monto Final</th>
+                <th>Estado</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>@item.IdCaja</td>
+                    <td>@item.FechaApertura</td>
+                    <td>@(item.FechaCierre?.ToString() ?? "Abierta / Sin Cierre")</td>
+                    <td>@item.MontoInicial Bs</td>
+                    <td>@(item.MontoFinal?.ToString() ?? "0.00") Bs</td>
+                    <td>
+                        <span class="badge @(item.Estado == "Abierta" ? "bg-success" : "bg-secondary")">
+                            @item.Estado
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <a asp-action="Edit" asp-route-id="@item.IdCaja" class="btn btn-sm btn-warning">✏️ Editar</a>
+                        <a asp-action="Delete" asp-route-id="@item.IdCaja" class="btn btn-sm btn-danger">🗑️ Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

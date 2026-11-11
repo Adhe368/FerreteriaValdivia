@@ -1,0 +1,33 @@
+@model FerreteriaValdiviaNueva.Models.Caja
+
+@{
+    ViewData["Title"] = "Eliminar Caja";
+}
+
+<div class="container mt-4">
+    <h2>Eliminar Registro de Caja</h2>
+    <h3 class="text-danger">¿Estás seguro de que deseas eliminar este registro de caja?</h3>
+    <hr />
+
+    <div>
+        <dl class="row">
+            <dt class="col-sm-3">ID:</dt>
+            <dd class="col-sm-9">@Model.IdCaja</dd>
+
+            <dt class="col-sm-3">Fecha Apertura:</dt>
+            <dd class="col-sm-9">@Model.FechaApertura</dd>
+
+            <dt class="col-sm-3">Monto Inicial:</dt>
+            <dd class="col-sm-9">@Model.MontoInicial Bs</dd>
+
+            <dt class="col-sm-3">Estado:</dt>
+            <dd class="col-sm-9">@Model.Estado</dd>
+        </dl>
+        
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="IdCaja" />
+            <button type="submit" class="btn btn-danger">Sí, Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>

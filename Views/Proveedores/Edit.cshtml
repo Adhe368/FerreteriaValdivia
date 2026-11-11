@@ -1,0 +1,46 @@
+@model FerreteriaValdiviaNueva.Models.Proveedor
+
+@{
+    ViewData["Title"] = "Editar Proveedor";
+}
+
+<div class="container mt-4">
+    <h2>Editar Proveedor</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdProveedor" />
+
+                <div class="mb-3">
+                    <label asp-for="NombreProveedor" class="form-label">Nombre del Proveedor</label>
+                    <input asp-for="NombreProveedor" class="form-control" required />
+                    <span asp-validation-for="NombreProveedor" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Telefono" class="form-label">Teléfono</label>
+                    <input asp-for="Telefono" class="form-control" />
+                    <span asp-validation-for="Telefono" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Direccion" class="form-label">Dirección</label>
+                    <input asp-for="Direccion" class="form-control" />
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">💾 Actualizar Cambios</button>
+                    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

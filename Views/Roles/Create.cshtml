@@ -1,0 +1,33 @@
+@model FerreteriaValdiviaNueva.Models.Rol
+
+@{
+    ViewData["Title"] = "Nuevo Rol";
+}
+
+<div class="container mt-4">
+    <h2>Registrar Nuevo Rol</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="NombreRol" class="form-label">Nombre del Rol</label>
+                    <input asp-for="NombreRol" class="form-control" required />
+                    <span asp-validation-for="NombreRol" class="text-danger"></span>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-success">💾 Guardar Rol</button>
+                    <a asp-action="Index" class="btn btn-secondary">Volver al Listado</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
