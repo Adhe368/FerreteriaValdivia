@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FerreteriaValdiviaNueva")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e82b6e3ceb5f1b6b2caf020a1536570edccb4d83")]
 [assembly: System.Reflection.AssemblyProductAttribute("FerreteriaValdiviaNueva")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FerreteriaValdiviaNueva")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

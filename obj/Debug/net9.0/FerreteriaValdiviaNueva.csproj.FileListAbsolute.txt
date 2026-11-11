@@ -102,3 +102,4 @@ C:\Users\Adhe\FerreteriaValdiviaNueva\obj\Debug\net9.0\refint\FerreteriaValdivia
 C:\Users\Adhe\FerreteriaValdiviaNueva\obj\Debug\net9.0\FerreteriaValdiviaNueva.pdb
 C:\Users\Adhe\FerreteriaValdiviaNueva\obj\Debug\net9.0\FerreteriaValdiviaNueva.genruntimeconfig.cache
 C:\Users\Adhe\FerreteriaValdiviaNueva\obj\Debug\net9.0\ref\FerreteriaValdiviaNueva.dll
+C:\Users\Adhe\FerreteriaValdiviaNueva\obj\Debug\net9.0\FerreteriaValdiviaNueva.sourcelink.json

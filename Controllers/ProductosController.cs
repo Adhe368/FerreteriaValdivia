@@ -18,6 +18,12 @@ namespace FerreteriaValdiviaNueva.Controllers
         // GET: Productos
         public async Task<IActionResult> Index()
         {
+            // Validar si el usuario inició sesión
+            if (HttpContext.Session.GetString("UsuarioNombre") == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             var productos = _context.Productos.Include(p => p.Categoria).Include(p => p.Proveedor);
             return View(await productos.ToListAsync());
         }
@@ -25,8 +31,13 @@ namespace FerreteriaValdiviaNueva.Controllers
         // GET: Productos/Create
         public IActionResult Create()
         {
-            ViewData["id_Categoria"] = new SelectList(_context.Categorias, "IdCategoria", "NombreCategoria");
-            ViewData["id_Proveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "NombreProveedor");
+            if (HttpContext.Session.GetString("UsuarioNombre") == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            ViewData["Id_Categoria"] = new SelectList(_context.Categorias, "IdCategoria", "NombreCategoria");
+            ViewData["Id_Proveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "NombreProveedor");
             return View();
         }
 
@@ -41,21 +52,26 @@ namespace FerreteriaValdiviaNueva.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["id_Categoria"] = new SelectList(_context.Categorias, "IdCategoria", "NombreCategoria", producto.id_Categoria);
-            ViewData["id_Proveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "NombreProveedor", producto.id_Proveedor);
+            ViewData["Id_Categoria"] = new SelectList(_context.Categorias, "IdCategoria", "NombreCategoria", producto.id_Categoria);
+            ViewData["Id_Proveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "NombreProveedor", producto.id_Proveedor);
             return View(producto);
         }
 
         // GET: Productos/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
+            if (HttpContext.Session.GetString("UsuarioNombre") == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             if (id == null) return NotFound();
 
             var producto = await _context.Productos.FindAsync(id);
             if (producto == null) return NotFound();
 
-            ViewData["id_Categoria"] = new SelectList(_context.Categorias, "IdCategoria", "NombreCategoria", producto.id_Categoria);
-            ViewData["id_Proveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "NombreProveedor", producto.id_Proveedor);
+            ViewData["Id_Categoria"] = new SelectList(_context.Categorias, "IdCategoria", "NombreCategoria", producto.id_Categoria);
+            ViewData["Id_Proveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "NombreProveedor", producto.id_Proveedor);
             return View(producto);
         }
 
@@ -80,14 +96,19 @@ namespace FerreteriaValdiviaNueva.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["id_Categoria"] = new SelectList(_context.Categorias, "IdCategoria", "NombreCategoria", producto.id_Categoria);
-            ViewData["id_Proveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "NombreProveedor", producto.id_Proveedor);
+            ViewData["Id_Categoria"] = new SelectList(_context.Categorias, "IdCategoria", "NombreCategoria", producto.id_Categoria);
+            ViewData["Id_Proveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "NombreProveedor", producto.id_Proveedor);
             return View(producto);
         }
 
         // GET: Productos/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
+            if (HttpContext.Session.GetString("UsuarioNombre") == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             if (id == null) return NotFound();
 
             var producto = await _context.Productos

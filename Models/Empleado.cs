@@ -29,5 +29,15 @@ namespace FerreteriaValdiviaNueva.Models
 
         [ForeignKey("IdRol")]
         public virtual Rol? Rol { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        [Column("Correo")]
+        public string Correo { get; set; } = string.Empty;
+
+        [Required]
+        [StringLength(255)]
+        [Column("Password")]
+         public string Password { get; set; } = string.Empty;
     }
 }

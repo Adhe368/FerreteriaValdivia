@@ -3,13 +3,12 @@ DROP DATABASE IF EXISTS ferreteriavaldiviadb;
 CREATE DATABASE ferreteriavaldiviadb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE ferreteriavaldiviadb;
 
--- 2. Tabla Categoria
+
 CREATE TABLE Categoria (
     id_Categoria INT AUTO_INCREMENT PRIMARY KEY,
     Nombre_Categoria VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB;
 
--- 3. Tabla Proveedor
 CREATE TABLE Proveedor (
     id_Proveedor INT AUTO_INCREMENT PRIMARY KEY,
     Nombre_Proveedor VARCHAR(100) NOT NULL,
@@ -17,23 +16,24 @@ CREATE TABLE Proveedor (
     Direccion VARCHAR(150)
 ) ENGINE=InnoDB;
 
--- 4. Tabla Rol
 CREATE TABLE Rol (
     id_Rol INT AUTO_INCREMENT PRIMARY KEY,
     Nombre_Rol VARCHAR(50) NOT NULL
 ) ENGINE=InnoDB;
 
--- 5. Tabla Empleado
+
 CREATE TABLE Empleado (
     id_Empleado INT AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
     Apellido VARCHAR(100) NOT NULL,
     Telefono VARCHAR(20),
+    Correo VARCHAR(100) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
     id_Rol INT,
     FOREIGN KEY (id_Rol) REFERENCES Rol(id_Rol) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
--- 6. Tabla Usuario
+
 CREATE TABLE Usuario (
     id_Usuario INT AUTO_INCREMENT PRIMARY KEY,
     NombreUsuario VARCHAR(50) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE Usuario (
     FOREIGN KEY (id_Empleado) REFERENCES Empleado(id_Empleado) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- 7. Tabla Cliente
+
 CREATE TABLE Cliente (
     id_Cliente INT AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE Cliente (
     Telefono VARCHAR(20)
 ) ENGINE=InnoDB;
 
--- 8. Tabla Caja
+
 CREATE TABLE Caja (
     id_Caja INT AUTO_INCREMENT PRIMARY KEY,
     FechaApertura DATETIME NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE Caja (
     FOREIGN KEY (id_Empleado) REFERENCES Empleado(id_Empleado) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
--- 9. Tabla Productos (con sus relaciones exactas)
+
 CREATE TABLE Productos (
     CodigoProducto VARCHAR(50) PRIMARY KEY,
     Nombre_Producto VARCHAR(100) NOT NULL,
@@ -78,56 +78,83 @@ CREATE TABLE Productos (
 ) ENGINE=InnoDB;
 
 
+-- ==========================================
+-- 10. INSERCIÓN DE DATOS REALES (10 registros c/u)
+-- ==========================================
 
 
-
--- ==========================================================
--- INSERT DE PRUEBA: FerreteriaValdiviaNueva
--- ==========================================================
-
--- 1. Categoria
-INSERT INTO Categoria (id_Categoria, Nombre_Categoria) VALUES 
-(1, 'Herramientas Manuales'), 
-(2, 'Electricidad'), 
-(3, 'Plomería');
-
--- 2. Proveedor
-INSERT INTO Proveedor (id_Proveedor, Nombre_Proveedor, Telefono, Direccion) VALUES 
-(1, 'Ferretería Mayorista S.R.L.', '22445566', 'Zona Industrial El Alto'),
-(2, 'Importaciones Globales', '23112233', 'Av. 6 de Agosto');
-
--- 3. Rol
 INSERT INTO Rol (id_Rol, Nombre_Rol) VALUES 
-(1, 'Administrador'), 
-(2, 'Cajero'), 
-(3, 'Almacenero');
+(1, 'Administrador General'),
+(2, 'Encargado de Almacén'),
+(3, 'Vendedor de Mostrador'),
+(4, 'Supervisor de Caja');
 
--- 4. Empleado
-INSERT INTO Empleado (id_Empleado, Nombre, Apellido, Telefono, id_Rol) VALUES 
-(1, 'Juan', 'Pérez', '70111222', 1),
-(2, 'María', 'Gómez', '70222333', 2),
-(3, 'Carlos', 'Soria', '70333444', 3);
 
--- 5. Usuario (Opcional, si lo usas)
-INSERT INTO Usuario (id_Usuario, NombreUsuario, Contrasena, id_Empleado) VALUES 
-(1, 'jperez', '123456', 1),
-(2, 'mgomez', '123456', 2);
+INSERT INTO Empleado (id_Empleado, Nombre, Apellido, Telefono, Correo, Password, id_Rol) VALUES
+(1, 'Rodrigo', 'Valdivia Mamani', '71548962', 'rodrigo.valdivia@ferreteria.com', '123', 1),
+(2, 'Alejandra', 'Salazar Flores', '72596314', 'alejandra.salazar@ferreteria.com', '123', 2),
+(3, 'Mauricio', 'Ticona Quispe', '73812546', 'mauricio.ticona@ferreteria.com', '123', 3),
+(4, 'Carla', 'Mendoza Rivero', '70125896', 'carla.mendoza@ferreteria.com', '123', 3),
+(5, 'Gonzalo', 'Paredes Choque', '79632147', 'gonzalo.paredes@ferreteria.com', '123', 4),
+(6, 'Valeria', 'Hinojosa Soria', '78965412', 'valeria.hinojosa@ferreteria.com', '123', 2),
+(7, 'Diego', 'Villarroel Cuentas', '77412589', 'diego.villarroel@ferreteria.com', '123', 3),
+(8, 'Jimena', 'Fernández Vargas', '76321458', 'jimena.fernandez@ferreteria.com', '123', 3),
+(9, 'Esteban', 'Arze Melendres', '75236987', 'esteban.arze@ferreteria.com', '123', 2),
+(10, 'Lucia', 'Montaño Bustillos', '71485236', 'lucia.montano@ferreteria.com', '123', 4);
 
--- 6. Cliente
-INSERT INTO Cliente (id_cliente, Nombre, Apellido, Nit_Ci, Telefono) VALUES 
-(1, 'Carlos', 'Valdivia', '4587962', '70123456'),
-(2, 'Ana', 'Pérez', '7894561', '79876543'),
-(3, 'Luis', 'Gómez', '1234567', '72345678');
 
--- 7. Caja
-INSERT INTO Caja (id_Caja, FechaApertura, FechaCierre, MontoInicial, MontoFinal, estado, id_Empleado) VALUES 
-(1, '2026-11-10 08:00:00', NULL, 150.00, NULL, 'Abierta', 2),
-(2, '2026-11-09 08:00:00', '2026-11-09 18:30:00', 100.00, 1250.50, 'Cerrada', 2),
-(3, '2026-11-08 08:00:00', '2026-11-08 19:00:00', 200.00, 1540.00, 'Cerrada', 1);
+INSERT INTO Categoria (id_Categoria, Nombre_Categoria) VALUES
+(1, 'Herramientas Manuales'),
+(2, 'Herramientas Eléctricas'),
+(3, 'Pinturas y Solventes'),
+(4, 'Plomería y Grifería'),
+(5, 'Electricidad e Iluminación'),
+(6, 'Materiales de Construcción'),
+(7, 'Cerrajería y Seguridad'),
+(8, 'Tornillería y Fijaciones'),
+(9, 'Jardinería y Riego'),
+(10, 'Equipos de Protección (EPP)');
 
--- 8. Productos
-INSERT INTO Productos (CodigoProducto, Nombre_Producto, PrecioVenta, StockMinimo, StockActual, CantidadVendida, id_Categoria, id_Proveedor) VALUES 
-('P001', 'Martillo de acero templado', 45.00, 5, 20, 3, 1, 1),
-('P002', 'Cinta aislante 10m', 8.50, 10, 50, 12, 2, 2),
-('P003', 'Llave ajustable 10"', 65.00, 3, 15, 2, 1, 1),
-('P004', 'Tubo PVC 4 pulgadas', 35.00, 8, 30, 5, 3, 2);
+
+INSERT INTO Proveedor (id_Proveedor, Nombre_Proveedor, Telefono, Direccion) VALUES
+(1, 'Ferretera Industrial Andina S.R.L.', '22456789', 'Av. 6 de Agosto #2400'),
+(2, 'Importadora Metalmecánica Bolivia', '23123456', 'Calle Comercio #500'),
+(3, 'Pinturas Soboce & Cía.', '24233445', 'El Alto, Zona Industrial'),
+(4, 'Casa de la Tornillería El Tunari', '21255667', 'Av. Buenos Aires #1200'),
+(5, 'Comercializadora Eléctrica Illimani', '22277889', 'Calle Murillo #315'),
+(6, 'Tubos y Conexiones Plasticor', '28399001', 'Zona Achachicala #80'),
+(7, 'Distribuidora de Aceros ACI', '23711223', 'Carretera a Viacha Km 4'),
+(8, 'Seguridad Industrial Total S.A.', '24133445', 'El Prado #1450'),
+(9, 'Herramientas y Maquinaria Bosch Bolivia', '27955667', 'Av. Montenegro, San Miguel'),
+(10, 'Importadora San José de Materiales', '22088990', 'Zona Villa Fátima #400');
+
+
+INSERT INTO Cliente (id_Cliente, Nombre, Apellido, Nit_Ci, Telefono) VALUES
+(1, 'Marcelo', 'Justiniano Prado', '4851230', '70711223'),
+(2, 'Beatriz', 'Ovando Montenegro', '6123489', '71822334'),
+(3, 'Renán', 'Calderón Luna', '3987124', '72933445'),
+(4, 'Silvia', 'Delgadillo Céspedes', '7012356', '73044556'),
+(5, 'Hernán', 'Borda Sotomayor', '2145896', '74155667'),
+(6, 'Patricia', 'Urey Zambrana', '5236987', '75266778'),
+(7, 'Gustavo', 'Espinoza Roca', '6891234', '76377889'),
+(8, 'Paola', 'Navia Melgar', '4123789', '77488990'),
+(9, 'Javier', 'Saavedra Cuéllar', '5896321', '78599001'),
+(10, 'Claudia', 'Peñaranda Ribera', '3145678', '79600112');
+
+
+INSERT INTO Caja (id_Caja, FechaApertura, MontoInicial, estado, id_Empleado) VALUES
+(1, '2026-11-11 08:00:00', 1000.00, 'Abierta', 1);
+
+
+INSERT INTO Productos (CodigoProducto, Nombre_Producto, PrecioVenta, StockMinimo, StockActual, CantidadVendida, id_Categoria, id_Proveedor) VALUES
+('PROD-001', 'Taladro Percutor Inalámbrico 18V', 650.00, 5, 25, 12, 2, 9),
+('PROD-002', 'Juego de Llaves Combinadas x 12 pzas', 180.00, 10, 40, 18, 1, 1),
+('PROD-003', 'Pintura Látex Blanco Interior 20L', 280.00, 8, 30, 22, 3, 3),
+('PROD-004', 'Inodoro Cerámico Completo Tradicional', 520.00, 3, 12, 5, 4, 6),
+('PROD-005', 'Rollo de Cable Mellizo Nro. 12 (100m)', 350.00, 5, 15, 9, 5, 5),
+('PROD-006', 'Bolsa de Cemento IP-40 (50kg)', 55.00, 20, 150, 85, 6, 10),
+('PROD-007', 'Cerradura de Sobreponer para Puerta', 120.00, 6, 20, 14, 7, 2),
+('PROD-008', 'Caja de Tornillos Autorroscantes (100u)', 45.00, 15, 60, 30, 8, 4),
+('PROD-009', 'Manguera de Riego Reforzada 1/2 pulg (50m)', 160.00, 4, 18, 7, 9, 6),
+('PROD-010', 'Casco de Seguridad Industrial c/ Arnés', 65.00, 10, 35, 19, 10, 8);
+
