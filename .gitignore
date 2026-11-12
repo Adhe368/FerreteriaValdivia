@@ -1,0 +1,19 @@
+## Visual Studio Workspace & User specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## ASP.NET Core / Dotnet Build Results
+[Oo]bj/
+[Bb]in/
+_ReSharper.*/
+*.rs.user
+*.[Cc]ache
+
+## Environment & OS files
+.vs/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log

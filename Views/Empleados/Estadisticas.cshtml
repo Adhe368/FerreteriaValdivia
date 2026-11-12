@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "Estadísticas de Empleados";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>📊 Panel Estadístico de Empleados</h2>
+        <a asp-action="Index" class="btn btn-secondary">← Volver al Listado</a>
+    </div>
+
+    <div class="row">
+        <!-- Tarjeta 1: Total de Empleados -->
+        <div class="col-md-6 mb-3">
+            <div class="card text-white bg-primary shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">👨‍💼 Total de Empleados</h5>
+                    <h3 class="display-6 fw-bold">@ViewBag.TotalEmpleados</h3>
+                    <p class="card-text">Cantidad total de personal activo en el sistema (COUNT).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta 2: Primer Empleado -->
+        <div class="col-md-6 mb-3">
+            <div class="card border-dark shadow-sm">
+                <div class="card-header bg-dark text-white fw-bold">📌 Primer Empleado Registrado</div>
+                <div class="card-body">
+                    <h4 class="card-title text-dark">@ViewBag.PrimerEmpleado</h4>
+                    <p class="card-text fs-5 text-muted">Colaborador inicial base del sistema.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

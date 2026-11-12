@@ -104,5 +104,25 @@ namespace FerreteriaValdiviaNueva.Controllers
         {
             return _context.Clientes.Any(e => e.IdCliente == id);
         }
+
+        // GET: Clientes/Estadisticas
+        public async Task<IActionResult> Estadisticas()
+        {
+            if (HttpContext.Session.GetString("UsuarioNombre") == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var clientes = _context.Clientes;
+
+            // 1. Total de clientes registrados (COUNT)
+            ViewBag.TotalClientes = await clientes.CountAsync();
+
+            // 2. Primer cliente registrado ordenado por su ID
+            var primerCliente = await clientes.OrderBy(c => c.IdCliente).FirstOrDefaultAsync();
+            ViewBag.PrimerCliente = primerCliente != null ? $"{primerCliente.Nombre} {primerCliente.Apellido}" : "N/D";
+
+            return View();
+        }
     }
 }

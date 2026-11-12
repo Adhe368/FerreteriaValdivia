@@ -104,5 +104,25 @@ namespace FerreteriaValdiviaNueva.Controllers
         {
             return _context.Roles.Any(e => e.IdRol == id);
         }
+
+        // GET: Roles/Estadisticas
+        public async Task<IActionResult> Estadisticas()
+        {
+            if (HttpContext.Session.GetString("UsuarioNombre") == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var roles = _context.Roles;
+
+            // 1. Total de roles registrados (COUNT)
+            ViewBag.TotalRoles = await roles.CountAsync();
+
+            // 2. Primer rol registrado ordenado por su ID
+            var primerRol = await roles.OrderBy(r => r.IdRol).FirstOrDefaultAsync();
+            ViewBag.PrimerRol = primerRol?.NombreRol ?? "N/D";
+
+            return View();
+        }
     }
 }

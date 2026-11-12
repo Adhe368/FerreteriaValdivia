@@ -139,5 +139,44 @@ namespace FerreteriaValdiviaNueva.Controllers
         {
             return _context.Productos.Any(e => e.CodigoProducto == id);
         }
+
+        // GET: Productos/Estadisticas
+        public async Task<IActionResult> Estadisticas()
+        {
+            // Verificamos si la sesión está activa (siguiendo la seguridad que implementamos)
+            if (HttpContext.Session.GetString("UsuarioNombre") == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var productos = _context.Productos;
+
+            // 1. Total de registros en la tabla (COUNT)
+            ViewBag.TotalProductos = await productos.CountAsync();
+
+            // 2. Promedio de precios de venta de los productos (AVG)
+            ViewBag.PrecioPromedio = await productos.AnyAsync() ? await productos.AverageAsync(p => p.PrecioVenta) : 0;
+
+            // 3. Stock total disponible en almacén (SUM)
+            ViewBag.StockTotal = await productos.AnyAsync() ? await productos.SumAsync(p => p.StockActual) : 0;
+
+            // 4. Producto más vendido (Combinando ordenamiento descendente)
+            var productoMasVendido = await productos
+                .OrderByDescending(p => p.CantidadVendida)
+                .FirstOrDefaultAsync();
+            
+            ViewBag.MasVendidoNombre = productoMasVendido?.Nombre_Producto ?? "N/D";
+            ViewBag.MasVendidoCantidad = productoMasVendido?.CantidadVendida ?? 0;
+
+            // 5. Producto con mayor precio del catálogo
+            var productoMasCaro = await productos
+                .OrderByDescending(p => p.PrecioVenta)
+                .FirstOrDefaultAsync();
+
+            ViewBag.MasCaroNombre = productoMasCaro?.Nombre_Producto ?? "N/D";
+            ViewBag.MasCaroPrecio = productoMasCaro?.PrecioVenta ?? 0;
+
+            return View();
+        }
     }
 }

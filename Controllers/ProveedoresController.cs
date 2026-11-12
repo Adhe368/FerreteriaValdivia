@@ -105,5 +105,25 @@ namespace FerreteriaValdiviaNueva.Controllers
         {
             return _context.Proveedores.Any(e => e.IdProveedor == id);
         }
+
+        // GET: Proveedores/Estadisticas
+        public async Task<IActionResult> Estadisticas()
+        {
+            if (HttpContext.Session.GetString("UsuarioNombre") == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var proveedores = _context.Proveedores;
+
+            // 1. Total de proveedores registrados (COUNT)
+            ViewBag.TotalProveedores = await proveedores.CountAsync();
+
+            // 2. Proveedor con el ID más alto o primero
+            var primerProveedor = await proveedores.OrderBy(p => p.IdProveedor).FirstOrDefaultAsync();
+            ViewBag.PrimerProveedor = primerProveedor?.NombreProveedor ?? "N/D";
+
+            return View();
+        }
     }
 }

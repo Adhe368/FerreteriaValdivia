@@ -104,5 +104,27 @@ namespace FerreteriaValdiviaNueva.Controllers
         {
             return _context.Cajas.Any(e => e.IdCaja == id);
         }
+
+        // GET: Cajas/Estadisticas
+        public async Task<IActionResult> Estadisticas()
+        {
+            if (HttpContext.Session.GetString("UsuarioNombre") == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var cajas = _context.Cajas;
+
+            // 1. Total de registros de caja (COUNT)
+            ViewBag.TotalCajas = await cajas.CountAsync();
+
+            // 2. Suma total del monto inicial acumulado (SUM)
+            ViewBag.SumaMontoInicial = await cajas.SumAsync(c => (decimal?)c.MontoInicial) ?? 0;
+
+            // 3. Cantidad de cajas abiertas actualmente
+            ViewBag.CajasAbiertas = await cajas.CountAsync(c => c.Estado == "Abierta");
+
+            return View();
+        }
     }
 }

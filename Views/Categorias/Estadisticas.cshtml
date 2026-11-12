@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "Estadísticas de Categorías";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>📊 Panel Estadístico de Categorías</h2>
+        <a asp-action="Index" class="btn btn-secondary">← Volver al Listado</a>
+    </div>
+
+    <div class="row">
+        <!-- Tarjeta 1: Total de Categorías -->
+        <div class="col-md-6 mb-3">
+            <div class="card text-white bg-primary shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">🗂️ Total de Categorías</h5>
+                    <h3 class="display-6 fw-bold">@ViewBag.TotalCategorias</h3>
+                    <p class="card-text">Cantidad total de registros en el sistema (COUNT).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta 2: Primera Categoría -->
+        <div class="col-md-6 mb-3">
+            <div class="card border-info shadow-sm">
+                <div class="card-header bg-info text-white fw-bold">📌 Categoría Inicial del Sistema</div>
+                <div class="card-body">
+                    <h4 class="card-title text-dark">@ViewBag.PrimeraCategoria</h4>
+                    <p class="card-text fs-5 text-muted">Primer registro base de la tabla.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

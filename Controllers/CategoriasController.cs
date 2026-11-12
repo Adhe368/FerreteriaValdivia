@@ -105,5 +105,25 @@ namespace FerreteriaValdiviaNueva.Controllers
         {
             return _context.Categorias.Any(e => e.IdCategoria == id);
         }
+
+        // GET: Categorias/Estadisticas
+        public async Task<IActionResult> Estadisticas()
+        {
+            if (HttpContext.Session.GetString("UsuarioNombre") == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var categorias = _context.Categorias;
+
+            // 1. Total de categorías registradas (COUNT)
+            ViewBag.TotalCategorias = await categorias.CountAsync();
+
+            // 2. Primera categoría registrada ordenada por su Id correcto
+            var primeraCategoria = await categorias.OrderBy(c => c.IdCategoria).FirstOrDefaultAsync();
+            ViewBag.PrimeraCategoria = primeraCategoria?.NombreCategoria ?? "N/D";
+
+            return View();
+        }
     }
 }

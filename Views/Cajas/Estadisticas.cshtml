@@ -1,0 +1,45 @@
+@{
+    ViewData["Title"] = "Estadísticas de Cajas";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>📊 Panel Estadístico de Cajas</h2>
+        <a asp-action="Index" class="btn btn-secondary">← Volver al Listado</a>
+    </div>
+
+    <div class="row">
+        <!-- Tarjeta 1: Total de Cajas -->
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-primary shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">📦 Total de Aperturas</h5>
+                    <h3 class="display-6 fw-bold">@ViewBag.TotalCajas</h3>
+                    <p class="card-text">Registros totales en el historial (COUNT).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta 2: Suma de Monto Inicial -->
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-success shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">💰 Monto Inicial Acumulado</h5>
+                    <h3 class="display-6 fw-bold">Bs @String.Format("{0:N2}", ViewBag.SumaMontoInicial)</h3>
+                    <p class="card-text">Suma de capital base inicial (SUM).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta 3: Cajas Abiertas -->
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-warning shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">🔓 Cajas Abiertas</h5>
+                    <h3 class="display-6 fw-bold text-dark">@ViewBag.CajasAbiertas</h3>
+                    <p class="card-text text-dark">Sesiones activas actualmente.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

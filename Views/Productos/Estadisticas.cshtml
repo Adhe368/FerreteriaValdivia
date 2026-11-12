@@ -1,0 +1,69 @@
+@{
+    ViewData["Title"] = "Estadísticas de Productos";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>📊 Panel Estadístico de Productos</h2>
+        <a asp-action="Index" class="btn btn-secondary">← Volver al Inventario</a>
+    </div>
+
+    <div class="row">
+        <!-- Tarjeta 1: Total Productos -->
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-primary shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">📦 Total de Productos</h5>
+                    <h3 class="display-6 fw-bold">@ViewBag.TotalProductos</h3>
+                    <p class="card-text">Variedad registrada en catálogo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta 2: Stock Total -->
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-success shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">📥 Stock Total en Almacén</h5>
+                    <h3 class="display-6 fw-bold">@ViewBag.StockTotal unidades</h3>
+                    <p class="card-text">Suma global de inventario físico (SUM).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta 3: Precio Promedio -->
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-warning shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">💰 Precio Promedio (AVG)</h5>
+                    <h3 class="display-6 fw-bold">Bs. @String.Format("{0:N2}", ViewBag.PrecioPromedio)</h3>
+                    <p class="card-text">Costo medio por artículo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <!-- Tarjeta 4: Producto Más Vendido -->
+        <div class="col-md-6 mb-3">
+            <div class="card border-info shadow-sm">
+                <div class="card-header bg-info text-white fw-bold">🏆 Producto Estrella (Más Vendido)</div>
+                <div class="card-body">
+                    <h4 class="card-title text-dark">@ViewBag.MasVendidoNombre</h4>
+                    <p class="card-text fs-5 text-muted">Unidades salidas: <span class="badge bg-success">@ViewBag.MasVendidoCantidad</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta 5: Producto Más Caro -->
+        <div class="col-md-6 mb-3">
+            <div class="card border-danger shadow-sm">
+                <div class="card-header bg-danger text-white fw-bold">💎 Producto de Mayor Valor</div>
+                <div class="card-body">
+                    <h4 class="card-title text-dark">@ViewBag.MasCaroNombre</h4>
+                    <p class="card-text fs-5 text-muted">Precio unitario: <span class="badge bg-danger">Bs. @String.Format("{0:N2}", ViewBag.MasCaroPrecio)</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
