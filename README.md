@@ -7,11 +7,9 @@ Sistema web desarrollado en **ASP.NET Core MVC** con Entity Framework Core y C#,
 ## 📋 Requisitos Previos
 
 Asegúrate de tener instalado en tu entorno de desarrollo:
-- [.NET SDK](https://dotnet.microsoft.com/download) (versión compatible con el proyecto, ej. .NET 6 o superior).
+- [.NET SDK](https://dotnet.microsoft.com/download) (.NET 9).
 - [Visual Studio 2022](https://visualstudio.microsoft.com/) o [Visual Studio Code](https://code.visualstudio.com/).
-- Un servidor de base de datos compatible (como **MySQL** o **MariaDB**).
-- Usar puerto 3306.
-
+- Un servidor de base de datos como **MySQL** o **MariaDB**.
 
 ---
 
@@ -22,8 +20,8 @@ Abre tu terminal en la carpeta del proyecto.
 
 ### 2. Configurar la Base de Datos
 El proyecto incluye un respaldo SQL para inicializar la estructura y datos necesarios:
-1. Ubica el archivo **`Base_de_datos.sql`** en la raíz o carpeta del proyecto.
-2. Importa este archivo en tu servidor MySQL / MariaDB utilizando tu gestor preferido (como *phpMyAdmin*, *HeidiSQL* o la consola de MySQL):
-   ```sql
-   CREATE DATABASE FerreteriaValdiviaNueva;
-   -- Luego importa el contenido del archivo Base_de_datos.sql en esta base de datos.
+1. Importa el archivo **`Base_de_datos.sql`** que esta en la raíz del proyecto en tu servidor de base de datos MySQL / MariaDB
+2. Correr la aplicacion
+```
+dotnet run
+```

@@ -1,28 +1,27 @@
 -- 1. Crear y usar la base de datos limpia
-DROP DATABASE IF EXISTS ferreteriavaldiviadb;
-CREATE DATABASE ferreteriavaldiviadb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS ferreteriavaldiviadb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 USE ferreteriavaldiviadb;
 
-
-CREATE TABLE Categoria (
+CREATE TABLE ferreteriavaldiviadb.Categoria (
     id_Categoria INT AUTO_INCREMENT PRIMARY KEY,
     Nombre_Categoria VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB;
 
-CREATE TABLE Proveedor (
+CREATE TABLE ferreteriavaldiviadb.Proveedor (
     id_Proveedor INT AUTO_INCREMENT PRIMARY KEY,
     Nombre_Proveedor VARCHAR(100) NOT NULL,
     Telefono VARCHAR(20),
     Direccion VARCHAR(150)
 ) ENGINE=InnoDB;
 
-CREATE TABLE Rol (
+CREATE TABLE ferreteriavaldiviadb.Rol (
     id_Rol INT AUTO_INCREMENT PRIMARY KEY,
     Nombre_Rol VARCHAR(50) NOT NULL
 ) ENGINE=InnoDB;
 
 
-CREATE TABLE Empleado (
+CREATE TABLE ferreteriavaldiviadb.Empleado (
     id_Empleado INT AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
     Apellido VARCHAR(100) NOT NULL,
@@ -34,7 +33,7 @@ CREATE TABLE Empleado (
 ) ENGINE=InnoDB;
 
 
-CREATE TABLE Usuario (
+CREATE TABLE ferreteriavaldiviadb.Usuario (
     id_Usuario INT AUTO_INCREMENT PRIMARY KEY,
     NombreUsuario VARCHAR(50) NOT NULL,
     Contrasena VARCHAR(255) NOT NULL,
@@ -43,7 +42,7 @@ CREATE TABLE Usuario (
 ) ENGINE=InnoDB;
 
 
-CREATE TABLE Cliente (
+CREATE TABLE ferreteriavaldiviadb.Cliente (
     id_Cliente INT AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
     Apellido VARCHAR(100) NOT NULL,
@@ -52,7 +51,7 @@ CREATE TABLE Cliente (
 ) ENGINE=InnoDB;
 
 
-CREATE TABLE Caja (
+CREATE TABLE ferreteriavaldiviadb.Caja (
     id_Caja INT AUTO_INCREMENT PRIMARY KEY,
     FechaApertura DATETIME NOT NULL,
     FechaCierre DATETIME NULL,
@@ -64,7 +63,7 @@ CREATE TABLE Caja (
 ) ENGINE=InnoDB;
 
 
-CREATE TABLE Productos (
+CREATE TABLE ferreteriavaldiviadb.Productos (
     CodigoProducto VARCHAR(50) PRIMARY KEY,
     Nombre_Producto VARCHAR(100) NOT NULL,
     PrecioVenta DECIMAL(18,2) NOT NULL,
@@ -83,14 +82,14 @@ CREATE TABLE Productos (
 -- ==========================================
 
 
-INSERT INTO Rol (id_Rol, Nombre_Rol) VALUES 
+INSERT INTO ferreteriavaldiviadb.Rol (id_Rol, Nombre_Rol) VALUES 
 (1, 'Administrador General'),
 (2, 'Encargado de Almacén'),
 (3, 'Vendedor de Mostrador'),
 (4, 'Supervisor de Caja');
 
 
-INSERT INTO Empleado (id_Empleado, Nombre, Apellido, Telefono, Correo, Password, id_Rol) VALUES
+INSERT INTO ferreteriavaldiviadb.Empleado (id_Empleado, Nombre, Apellido, Telefono, Correo, Password, id_Rol) VALUES
 (1, 'Rodrigo', 'Valdivia Mamani', '71548962', 'rodrigo.valdivia@ferreteria.com', '123', 1),
 (2, 'Alejandra', 'Salazar Flores', '72596314', 'alejandra.salazar@ferreteria.com', '123', 2),
 (3, 'Mauricio', 'Ticona Quispe', '73812546', 'mauricio.ticona@ferreteria.com', '123', 3),
@@ -103,7 +102,7 @@ INSERT INTO Empleado (id_Empleado, Nombre, Apellido, Telefono, Correo, Password,
 (10, 'Lucia', 'Montaño Bustillos', '71485236', 'lucia.montano@ferreteria.com', '123', 4);
 
 
-INSERT INTO Categoria (id_Categoria, Nombre_Categoria) VALUES
+INSERT INTO ferreteriavaldiviadb.Categoria (id_Categoria, Nombre_Categoria) VALUES
 (1, 'Herramientas Manuales'),
 (2, 'Herramientas Eléctricas'),
 (3, 'Pinturas y Solventes'),
@@ -116,7 +115,7 @@ INSERT INTO Categoria (id_Categoria, Nombre_Categoria) VALUES
 (10, 'Equipos de Protección (EPP)');
 
 
-INSERT INTO Proveedor (id_Proveedor, Nombre_Proveedor, Telefono, Direccion) VALUES
+INSERT INTO ferreteriavaldiviadb.Proveedor (id_Proveedor, Nombre_Proveedor, Telefono, Direccion) VALUES
 (1, 'Ferretera Industrial Andina S.R.L.', '22456789', 'Av. 6 de Agosto #2400'),
 (2, 'Importadora Metalmecánica Bolivia', '23123456', 'Calle Comercio #500'),
 (3, 'Pinturas Soboce & Cía.', '24233445', 'El Alto, Zona Industrial'),
@@ -129,7 +128,7 @@ INSERT INTO Proveedor (id_Proveedor, Nombre_Proveedor, Telefono, Direccion) VALU
 (10, 'Importadora San José de Materiales', '22088990', 'Zona Villa Fátima #400');
 
 
-INSERT INTO Cliente (id_Cliente, Nombre, Apellido, Nit_Ci, Telefono) VALUES
+INSERT INTO ferreteriavaldiviadb.Cliente (id_Cliente, Nombre, Apellido, Nit_Ci, Telefono) VALUES
 (1, 'Marcelo', 'Justiniano Prado', '4851230', '70711223'),
 (2, 'Beatriz', 'Ovando Montenegro', '6123489', '71822334'),
 (3, 'Renán', 'Calderón Luna', '3987124', '72933445'),
@@ -142,11 +141,11 @@ INSERT INTO Cliente (id_Cliente, Nombre, Apellido, Nit_Ci, Telefono) VALUES
 (10, 'Claudia', 'Peñaranda Ribera', '3145678', '79600112');
 
 
-INSERT INTO Caja (id_Caja, FechaApertura, MontoInicial, estado, id_Empleado) VALUES
+INSERT INTO ferreteriavaldiviadb.Caja (id_Caja, FechaApertura, MontoInicial, estado, id_Empleado) VALUES
 (1, '2026-11-11 08:00:00', 1000.00, 'Abierta', 1);
 
 
-INSERT INTO Productos (CodigoProducto, Nombre_Producto, PrecioVenta, StockMinimo, StockActual, CantidadVendida, id_Categoria, id_Proveedor) VALUES
+INSERT INTO ferreteriavaldiviadb.Productos (CodigoProducto, Nombre_Producto, PrecioVenta, StockMinimo, StockActual, CantidadVendida, id_Categoria, id_Proveedor) VALUES
 ('PROD-001', 'Taladro Percutor Inalámbrico 18V', 650.00, 5, 25, 12, 2, 9),
 ('PROD-002', 'Juego de Llaves Combinadas x 12 pzas', 180.00, 10, 40, 18, 1, 1),
 ('PROD-003', 'Pintura Látex Blanco Interior 20L', 280.00, 8, 30, 22, 3, 3),
