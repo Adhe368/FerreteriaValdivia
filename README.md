@@ -25,3 +25,21 @@ El proyecto incluye un respaldo SQL para inicializar la estructura y datos neces
 ```
 dotnet run
 ```
+
+
+
+DATOS EXTRAS:
+-Cambiar  appsettings.json por:
+
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;Port=3306;Database=ferreteria_valdivia;User=root;Password=;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}

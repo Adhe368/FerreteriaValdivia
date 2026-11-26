@@ -1,24 +1,24 @@
+CREATE DATABASE IF NOT EXISTS ferreteria_valdivia CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE ferreteria_valdivia;
 
-
-CREATE TABLE  Categoria (
+CREATE TABLE Categoria (
     id_Categoria INT AUTO_INCREMENT PRIMARY KEY,
     Nombre_Categoria VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB;
 
-CREATE TABLE  Proveedor (
+CREATE TABLE Proveedor (
     id_Proveedor INT AUTO_INCREMENT PRIMARY KEY,
     Nombre_Proveedor VARCHAR(100) NOT NULL,
     Telefono VARCHAR(20),
     Direccion VARCHAR(150)
 ) ENGINE=InnoDB;
 
-CREATE TABLE  Rol (
+CREATE TABLE Rol (
     id_Rol INT AUTO_INCREMENT PRIMARY KEY,
     Nombre_Rol VARCHAR(50) NOT NULL
 ) ENGINE=InnoDB;
 
-
-CREATE TABLE  Empleado (
+CREATE TABLE Empleado (
     id_Empleado INT AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
     Apellido VARCHAR(100) NOT NULL,
@@ -29,8 +29,7 @@ CREATE TABLE  Empleado (
     FOREIGN KEY (id_Rol) REFERENCES Rol(id_Rol) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
-
-CREATE TABLE  Usuario (
+CREATE TABLE Usuario (
     id_Usuario INT AUTO_INCREMENT PRIMARY KEY,
     NombreUsuario VARCHAR(50) NOT NULL,
     Contrasena VARCHAR(255) NOT NULL,
@@ -38,8 +37,7 @@ CREATE TABLE  Usuario (
     FOREIGN KEY (id_Empleado) REFERENCES Empleado(id_Empleado) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
-
-CREATE TABLE  Cliente (
+CREATE TABLE Cliente (
     id_Cliente INT AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
     Apellido VARCHAR(100) NOT NULL,
@@ -47,8 +45,7 @@ CREATE TABLE  Cliente (
     Telefono VARCHAR(20)
 ) ENGINE=InnoDB;
 
-
-CREATE TABLE  Caja (
+CREATE TABLE Caja (
     id_Caja INT AUTO_INCREMENT PRIMARY KEY,
     FechaApertura DATETIME NOT NULL,
     FechaCierre DATETIME NULL,
@@ -59,8 +56,7 @@ CREATE TABLE  Caja (
     FOREIGN KEY (id_Empleado) REFERENCES Empleado(id_Empleado) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
-
-CREATE TABLE  Productos (
+CREATE TABLE Productos (
     CodigoProducto VARCHAR(50) PRIMARY KEY,
     Nombre_Producto VARCHAR(100) NOT NULL,
     PrecioVenta DECIMAL(18,2) NOT NULL,
